@@ -36,7 +36,9 @@ router.post('/login', (req, res) => {
     console.log(`오케이`);
     req.session.isLogined = true;
     req.session.nickname = dbId;
-    res.sendFile(__dirname + '/public/welcome.html');
+    req.session.save((err) => {
+      res.sendFile(__dirname + '/public/welcome.html');
+    });
   } else {
     console.log('낫오케이');
     req.session.isLogined = false;
